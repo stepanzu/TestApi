@@ -19,8 +19,17 @@ namespace TestApi.Controllers
         }
 
         [HttpGet]
+        [Route("{page}/{pageSize}")]
+        public List<Cliente> Get(int page, int pageSize)
+        {
+            var clientes = ClienteRepository.GetAllClientes(page, pageSize);
+
+            return clientes;
+        }
+
+        [HttpGet]
         [Route("{id}")]
-        public Cliente? GetArticulo(int id)
+        public Cliente? GetCliente(int id)
         {
             var cliente = ClienteRepository.GetCliente(id);
 

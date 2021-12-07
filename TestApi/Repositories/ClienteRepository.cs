@@ -18,6 +18,14 @@ namespace TestApi.Repositories
             return lc;
         }
 
+        public static List<Cliente> GetAllClientes(int page, int pageSize)
+        {
+
+            List<Cliente> lc = _context.Clientes.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return lc;
+        }
+
         public static Cliente? GetCliente(int clienteId)
         {
             Cliente? cliente = _context.Clientes.Where(x => x.Id == clienteId).FirstOrDefault();
