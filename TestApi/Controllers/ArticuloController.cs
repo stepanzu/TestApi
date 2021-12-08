@@ -27,6 +27,15 @@ namespace TestApi.Controllers
             return articulo;
         }
 
+        [HttpGet]
+        [Route("TotalPages/{pageSize}")]
+        public int GetTotalPages(int pageSize)
+        {
+            int pages = ArticuloRepository.GetTotalPages(pageSize);
+
+            return pages;
+        }
+
 
     }
 }

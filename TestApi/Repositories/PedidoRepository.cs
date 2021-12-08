@@ -34,5 +34,19 @@ namespace TestApi.Repositories
             return pedido;
         }
 
+        public static int GetTotalPages(int pageSize)
+        {
+            int totalItemCount = _context.Pedidos.Count();
+
+            return System.Convert.ToInt32(System.Math.Ceiling(totalItemCount / System.Convert.ToDouble(pageSize))); ;
+        }
+
+        public static int GetTotalPages(int pageSize, int clienteId)
+        {
+            int totalItemCount = _context.Pedidos.Where(p => p.ClienteId == clienteId).Count();
+
+            return System.Convert.ToInt32(System.Math.Ceiling(totalItemCount / System.Convert.ToDouble(pageSize))); ;
+        }
+
     }
 }

@@ -45,6 +45,24 @@ namespace TestApi.Controllers
             return pedido;
         }
 
+        [HttpGet]
+        [Route("TotalPages/{pageSize}")]
+        public int GetTotalPages(int pageSize)
+        {
+            int pages = PedidoRepository.GetTotalPages(pageSize);
+
+            return pages;
+        }
+
+        [HttpGet]
+        [Route("TotalPages/{pageSize}/{id}")]
+        public int GetTotalPages(int pageSize, int id)
+        {
+            int pages = PedidoRepository.GetTotalPages(pageSize, id);
+
+            return pages;
+        }
+
 
     }
 }

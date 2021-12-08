@@ -36,6 +36,15 @@ namespace TestApi.Controllers
             return cliente;
         }
 
+        [HttpGet]
+        [Route("TotalPages/{pageSize}")]
+        public int GetTotalPages(int pageSize)
+        {
+            int pages = ClienteRepository.GetTotalPages(pageSize);
+
+            return pages;
+        }
+
 
     }
 }

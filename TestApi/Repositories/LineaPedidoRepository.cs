@@ -1,4 +1,5 @@
-﻿using TestApi.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TestApi.Models;
 
 namespace TestApi.Repositories
 {
@@ -8,7 +9,7 @@ namespace TestApi.Repositories
 
         public static List<LineaPedido> GetAllLineasPedidos()
         {
-            List<LineaPedido> lc = _context.LineaPedidos.ToList();
+            List<LineaPedido> lc = _context.LineaPedidos.Include(l=>l.Articulo).ToList();
 
             return lc;
         }
@@ -33,6 +34,20 @@ namespace TestApi.Repositories
         {
             LineaPedido? lineaPedido = _context.LineaPedidos.Where(x => x.Id == lineaId).FirstOrDefault();
             return lineaPedido;
+        }
+
+        public static int GetTotalPages(int pageSize)
+        {
+            int totalItemCount = _context.LineaPedidos.Count();
+
+            return System.Convert.ToInt32(System.Math.Ceiling(totalItemCount / System.Convert.ToDouble(pageSize))); ;
+        }
+
+        public static int GetTotalPages(int pageSize, int pedidoId)
+        {
+            int totalItemCount = _context.LineaPedidos.Where(p => p.PedidoId == pedidoId).Count();
+
+            return System.Convert.ToInt32(System.Math.Ceiling(totalItemCount / System.Convert.ToDouble(pageSize))); ;
         }
 
     }
